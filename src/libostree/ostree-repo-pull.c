@@ -274,6 +274,7 @@ update_progress (gpointer user_data)
   guint outstanding_writes;
   guint outstanding_fetches;
   guint64 bytes_transferred;
+  guint outstanding_requests;
   guint fetched;
   guint requested;
   guint n_scanned_metadata;
@@ -294,6 +295,7 @@ update_progress (gpointer user_data)
   outstanding_fetches = pull_data->n_outstanding_content_fetches +
     pull_data->n_outstanding_metadata_fetches +
     pull_data->n_outstanding_deltapart_fetches;
+  outstanding_requests = _ostree_fetcher_outstanding_requests(pull_data->fetcher);
   bytes_transferred = _ostree_fetcher_bytes_transferred (pull_data->fetcher);
   fetched = pull_data->n_fetched_metadata + pull_data->n_fetched_content;
   requested = pull_data->n_requested_metadata + pull_data->n_requested_content;
@@ -301,6 +303,7 @@ update_progress (gpointer user_data)
   start_time = pull_data->start_time;
 
   ostree_async_progress_set (pull_data->progress,
+                             "outstanding_requests", "u", outstanding_requests,
                              "outstanding-fetches", "u", outstanding_fetches,
                              "outstanding-writes", "u", outstanding_writes,
                              "fetched", "u", fetched,

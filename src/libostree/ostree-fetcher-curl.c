@@ -957,3 +957,9 @@ _ostree_fetcher_bytes_transferred (OstreeFetcher       *self)
 {
   return self->bytes_transferred;
 }
+
+guint
+_ostree_fetcher_outstanding_requests (OstreeFetcher       *self)
+{
+  return g_hash_table_size(self->outstanding_requests);
+}

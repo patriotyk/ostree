@@ -1304,3 +1304,9 @@ _ostree_fetcher_bytes_transferred (OstreeFetcher       *self)
 
   return ret;
 }
+
+guint
+_ostree_fetcher_outstanding_requests (OstreeFetcher       *self)
+{
+  return 0;
+}
